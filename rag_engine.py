@@ -1,7 +1,7 @@
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 from langchain_groq import ChatGroq
@@ -10,7 +10,7 @@ from config import GROQ_API_KEY
 
 
 # --------------------------------------------------
-# BUILD VECTOR DATABASE
+# CREATE VECTOR DATABASE
 # --------------------------------------------------
 
 def build_vectorstore(text):
@@ -26,7 +26,7 @@ def build_vectorstore(text):
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    vectorstore = Chroma.from_documents(
+    vectorstore = FAISS.from_documents(
         docs,
         embeddings
     )
